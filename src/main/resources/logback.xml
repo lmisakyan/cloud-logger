@@ -1,0 +1,22 @@
+<configuration>
+	<appender name="FILE-MODULE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/oracle/mwhome/logs/cloud-logger.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+		</encoder>
+ 
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>/oracle/mwhome/logs/cloud-logger.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+ 
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>2MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<logger name="com.cloudlogger.infrastructure.persistence" level="debug" additivity="false">
+		<appender-ref ref="FILE-MODULE" />
+	</logger>
+</configuration>
